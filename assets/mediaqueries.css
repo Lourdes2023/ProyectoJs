@@ -1,0 +1,166 @@
+@media (max-width: 767px) {
+  /* Estilos para pantallas pequeñas */
+  .navbar-collapse {
+    width: 100%;
+    position: relative;
+    left: 0%;
+
+    top: 150px;
+    padding-bottom: 20px;
+  }
+  .cart {
+    left: 60%;
+    width: 178px;
+  }
+  .remove-item {
+    margin-left: 0px;
+  }
+  .shopping-cart h2 {
+    font-size: 14px;
+  }
+  .cart-count {
+    top: 80%;
+    left: 55%;
+  }
+  .checkout {
+    width: 80px;
+    height: 50px;
+    font-size: 12px;
+  }
+  #result-container {
+    display: flex;
+    justify-content: center;
+    width: 310px;
+    height: auto;
+  }
+
+  .slider-container {
+    width: 350px;
+  }
+  .card-container {
+    display: flex;
+    justify-content: center;
+  }
+  .card {
+    width: 300px;
+    height: auto;
+  }
+
+  .contact-content {
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .contact-info {
+    background: none;
+    margin-bottom: 20px;
+    color: white;
+  }
+
+  .contact-form {
+    background-color: none;
+    color: white;
+    max-width: none;
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 992px) {
+  .navbar-collapse {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    padding-bottom: 10px;
+    display: flex;
+    padding: 20px;
+  }
+
+  .cart-count {
+    top: 85%;
+    left: 55%;
+  }
+  .hero {
+    width: 90%;
+    padding: 30px;
+    background-image: none;
+    border: none;
+  }
+  .form-control {
+    width: 30%;
+  }
+  .hero-title {
+    font-size: 30px;
+    text-align: center;
+  }
+
+  .search-container {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+
+  .hero-title-p {
+    display: none;
+  }
+
+  .featured-products {
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    width: 90%;
+  }
+  .slider-container {
+    width: 350px;
+  }
+  .card-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  .slider {
+    display: flex;
+    justify-content: stretch;
+  }
+
+  .prev-button,
+  .next-button {
+    display: none;
+  }
+
+  #verMenosButton {
+    position: fixed;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+  }
+  .contact-content {
+    flex-direction: row;
+  }
+
+  .contact-info {
+    margin-right: 20px;
+  }
+}
+
+@media screen and (min-width: 1023px) {
+  /* Estilos para pantallas grandes */
+
+  .slider-container {
+    overflow: hidden;
+  }
+
+  .slider {
+    display: flex;
+    transition: transform 0.3s;
+  }
+
+  .prev-button,
+  .next-button {
+    display: block;
+  }
+  .card-container {
+    width: 100%;
+  }
+}
