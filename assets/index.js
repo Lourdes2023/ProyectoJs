@@ -10,15 +10,14 @@ const categoryButtons = document.querySelectorAll(".category-button");
 const searchInput = document.getElementById("search-input");
 const searchButton = document.getElementById("search-button");
 const searchResults = document.getElementById("result-container");
-const cartContainer = document.querySelector(".cart");
 const cartTotal = document.getElementById("cart-total");
 const cartItemsContainer = document.querySelector(".cart-items");
 const cartCountElement = document.getElementById("cart-count");
+const cartContainer = document.querySelector(".cart");
 const cartIcon = document.querySelector(".cart-icon");
-const navbarToggleIcon = document.querySelector(".navbar-toggler-icon");
-const navbarCollapse = document.getElementById("navbar-collapse");
-const navbarNav = document.getElementById("navbarNav");
-const navbarToggle = document.getElementById("navbar-toggler-icon");
+const navbarcollapse = document.querySelector(".navbar-collapse");
+console.log(navbarcollapse);
+const navbarToggleIcon = document.getElementById("navbarToggle");
 const checkoutButton = document.querySelector(".checkout");
 const myForm = document.getElementById("myForm");
 const nameInput = document.getElementById("name");
@@ -31,8 +30,6 @@ const submitButton = document.getElementById("submitButton");
 let cartTotalPrice = parseFloat(localStorage.getItem("cartTotalPrice")) || 0;
 let currentPosition = 0;
 let groups = [];
-const cardWidth = 300;
-const slideStep = cardWidth * 3;
 const defaultProduct = {
   id: 0,
   name: "Victoria",
@@ -104,9 +101,12 @@ const showLessProducts = () => {
 //------------------------------------------------------------Mostrar productos buscados-----------------------------------------
 
 const getProductByName = (name) => {
-  return appState.products.find(
+  const product = appState.products.find(
     (product) => product.name.toLowerCase() === name.toLowerCase()
   );
+  console.log("ultimoBuscado", appState.products);
+  console.log("ultimoBuscado", product);
+  return product;
 };
 
 const showSearchedProduct = (product) => {
@@ -257,13 +257,29 @@ const updateCartCount = () => {
   const totalCountAsNumber = parseInt(totalCount);
   cartCountElement.textContent = totalCountAsNumber;
 };
-//------------------------------------------------------------------Carritotoggle---------------------------------------------------
+//------------------------------------------------------------------toggle---------------------------------------------------
 
 const toggleCartVisibility = () => {
-  cartContainer.classList.toggle("hidden");
-  const isMenuVisible = navbarNav.style.display !== "none";
-  if (isMenuVisible) {
-    navbarNav.style.display = "none";
+  cartContainer.classList.toggle("openCart");
+  if (navbarcollapse.classList.contains("openMenu")) {
+    navbarcollapse.classList.remove("openMenu");
+  }
+};
+
+const toggleMenu = () => {
+  navbarcollapse.classList.toggle("openMenu");
+  if (cartContainer.classList.contains("openCart")) {
+    cartContainer.classList.remove("openCart");
+  }
+};
+
+const closeCartAndMenu = () => {
+  if (cartContainer.classList.contains("openCart")) {
+    cartContainer.classList.remove("openCart");
+  }
+
+  if (navbarcollapse.classList.contains("openMenu")) {
+    navbarcollapse.classList.remove("openMenu");
   }
 };
 //------------------------------------------------------------------Formulario de pago-----------------------------------
@@ -286,48 +302,50 @@ const handleCheckout = () => {
   }
 };
 
-//------------------------------------------------------------------Menutoggle--------------------------------------------------------
-
-const toggleMenu = () => {
-  const isMenuVisible = navbarNav.style.display !== "none";
-  if (isMenuVisible) {
-    navbarNav.style.display = "none";
-  } else {
-    navbarNav.style.display = "flex";
-  }
-};
-
 //-------------------------------------------------------------------Deslizar productos---------------------------------------
 
 //---------------------------------------------------------Botones de deslizamiento-----------------------------------------------------------------------------
+
 const slideLeft = () => {
-  appState.slidePosition += slideStep;
+  const cardWidth = 300;
+  const numProductsToSlide = Math.floor(window.innerWidth / cardWidth);
+  appState.slidePosition += cardWidth * numProductsToSlide;
+
   const maxSlidePosition = 0;
   const minSlidePosition = -(
     productsContainer.scrollWidth - productsContainer.clientWidth
   );
+
   if (appState.slidePosition > maxSlidePosition) {
     appState.slidePosition = maxSlidePosition;
   }
   if (appState.slidePosition < minSlidePosition) {
     appState.slidePosition = minSlidePosition;
   }
+
   productsContainer.style.transform = `translateX(${appState.slidePosition}px)`;
 };
+
 const slideRight = () => {
+  const cardWidth = 300;
+  const numProductsToSlide = Math.floor(window.innerWidth / cardWidth);
+  appState.slidePosition -= cardWidth * numProductsToSlide;
+
   const maxSlidePosition = 0;
   const minSlidePosition = -(
     productsContainer.scrollWidth - productsContainer.clientWidth
   );
-  appState.slidePosition -= slideStep;
+
   if (appState.slidePosition < minSlidePosition) {
     appState.slidePosition = minSlidePosition;
   }
   if (appState.slidePosition > maxSlidePosition) {
     appState.slidePosition = maxSlidePosition;
   }
+
   productsContainer.style.transform = `translateX(${appState.slidePosition}px)`;
 };
+
 //------------------------------------------------------------------filtro por categoria-----------------------------------------------------------------------------
 //Función para filtrar los productos por categoría
 const filterProductsByCategory = (category) => {
@@ -476,6 +494,7 @@ function init() {
   checkoutButton.addEventListener("click", handleCheckout);
   cartIcon.addEventListener("click", toggleCartVisibility);
   navbarToggleIcon.addEventListener("click", toggleMenu);
+  window.addEventListener("scroll", closeCartAndMenu);
   document.addEventListener("DOMContentLoaded", () => {
     updateCartUI();
     updateCartCount();

@@ -25,7 +25,7 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #ffffff;
+  background-color: #2c363c72;
   position: fixed;
   top: 0;
   left: 0;
@@ -35,22 +35,14 @@ header {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.navbar-collapse {
-  background: #ffffff;
-  width: 100%;
-}
 .logo-img {
   width: 80px;
   height: 80px;
 }
-#navbarNav {
-  display: none;
-}
+
 .navbar-nav {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 30px;
+  background: #fff;
+  border-radius: 12px;
 }
 .navbar-toggler {
   border: none;
@@ -59,14 +51,14 @@ header {
 }
 
 .navbar-toggler-icon {
-  background-color: #d1c8c8;
+  background-color: #666869;
   border-radius: 8px;
   width: 40px;
   height: 40px;
 }
 
 .navbar-toggler:hover .navbar-toggler-icon {
-  background-color: #555;
+  background-color: #9ea1a3;
 }
 .nav-link {
   margin-right: 15px;
@@ -88,9 +80,10 @@ header {
   width: 300px;
   display: none;
 }
-.hidden {
+.openCart {
   display: flex;
 }
+
 .hiddenscroll {
   display: none;
 }
@@ -99,7 +92,7 @@ header {
   justify-content: center;
   align-items: center;
   width: 100%;
-  background-color: #a390a2bb;
+  background-color: #9890a3bb;
   padding: 20px;
   position: absolute;
   top: 100%;
@@ -119,15 +112,18 @@ header {
 }
 
 .cart-icon {
-  font-size: 20px;
+  margin-left: 30px;
   cursor: pointer;
-}
-.cart-icon img {
-  width: 50px;
   border-radius: 12px;
+  font-size: 14px;
+}
+
+.cart-icon img {
+  border-radius: 12px;
+  width: 40px;
   transition: all 0.3s ease;
 }
-.cart-icon img:hover {
+.cart-icon :hover {
   filter: invert(40%);
 }
 
@@ -147,13 +143,13 @@ header {
   border-radius: 50%;
 }
 
-.cart:hover .cart-icon,
-.cart:hover .cart-count {
-  color: #ff0000;
+.container:hover .cart-icon,
+.container:hover .cart-count {
+  color: #ff7700;
   background-color: #fff;
 }
 
-#productos-seleccionados {
+/* #productos-seleccionados {
   background-color: #c7cac4;
   border: 1px solid #ccc;
   border-radius: 12px;
@@ -166,7 +162,7 @@ header {
 
 .producto-seleccionado span {
   margin-right: 10px;
-}
+} */
 
 .cart-items {
   list-style: none;
@@ -301,6 +297,7 @@ header {
 #result-container {
   display: flex;
   justify-content: center;
+  align-items: center;
   width: 350px;
   height: auto;
   background: #242424;

@@ -31,8 +31,8 @@
             <button id="navbarToggle" class="navbar-toggler" type="button">
               <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="navbar-collapse" id="navbarNav">
-              <ul class="navbar-nav">
+            <div class="navbar-collapse">
+              <ul class="navbar-nav" id="navbarNav">
                 <li class="nav-item">
                   <a class="nav-link" href="#hero">Inicio</a>
                 </li>
@@ -45,22 +45,11 @@
                 <li class="nav-item">
                   <a class="nav-link" href="#Contact">Contacto</a>
                 </li>
-                <li class="nav-item">
-                  <span class="cart-icon">
-                    <img
-                      src="assets/img/Logo-Fondo/carrito.jpg"
-                      alt="Icono de carrito de compras"
-                    />
-                  </span>
-
-                  <span class="cart-count" id="cart-count">0</span>
-                </li>
               </ul>
             </div>
-
             <div class="cart">
-              <div class="shopping-cart" id="cartContainer">
-                <h2>Carrito de Compras</h2>
+              <div class="shopping-cart">
+                <h2>Carrito de compras</h2>
                 <ul class="cart-items">
                   <!-- Aquí se agregarán los productos del carrito dinámicamente -->
                 </ul>
@@ -70,6 +59,13 @@
                 </div>
               </div>
             </div>
+            <span class="cart-icon">
+              <img
+                src="assets/img/Logo-Fondo/carrito.jpg"
+                alt="Icono de carrito de compras"
+              />
+            </span>
+            <span class="cart-count" id="cart-count">0</span>
           </div>
         </nav>
       </header>
