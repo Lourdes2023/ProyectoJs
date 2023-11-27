@@ -5,6 +5,7 @@
   margin: 0;
   padding: 0;
   font-family: "Lato", sans-serif;
+  
 }
 
 body {
@@ -41,7 +42,7 @@ header {
 }
 
 .navbar-nav {
-  background: #fff;
+ 
   border-radius: 12px;
 }
 .navbar-toggler {
@@ -68,7 +69,7 @@ header {
 }
 
 .nav-link:hover {
-  color: #e21515;
+background: #6c6969;
 }
 
 .cart {
@@ -148,21 +149,6 @@ header {
   color: #ff7700;
   background-color: #fff;
 }
-
-/* #productos-seleccionados {
-  background-color: #c7cac4;
-  border: 1px solid #ccc;
-  border-radius: 12px;
-  padding: 10px;
-}
-
-.producto-seleccionado {
-  margin-bottom: 10px;
-}
-
-.producto-seleccionado span {
-  margin-right: 10px;
-} */
 
 .cart-items {
   list-style: none;
@@ -254,14 +240,15 @@ header {
   height: auto;
   padding: 50px;
   border: 1px solid rgb(225, 207, 207);
-  background-image: linear-gradient(to top, #65a9c5, #2f6286);
+  background: linear-gradient(to right, #8a2be2, #00bfff);
+
   border-radius: 12px;
 }
 
 .hero-title {
   font-size: 40px;
   font-weight: 600;
-  color: #aca28d;
+  color: rgb(29, 14, 2);
   text-align: start;
   padding: 30px;
 }
@@ -400,24 +387,31 @@ header {
 .about-section {
   padding: 50px 0;
   width: 80%;
+ 
 }
-
-.about-section h2 {
-  font-size: 32px;
+.colored-div {
+  background: linear-gradient(to right, #000000, transparent);
+  box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.5);
+  opacity: 0.8;
+}
+.about-section h3 {
+  font-size: 2rem;
   font-weight: bold;
   margin-bottom: 20px;
-  color: #aca28d;
+  color:#ff6a00c0;
 }
 
 .about-section p {
-  line-height: 1.6;
+font-size: 1.2rem;
+  color: white;
+  padding-bottom: 20px;
 }
 
 /* Estilos para la sección de Productos */
 
 .products-section {
-  background-color: #ededed;
-  padding: 50px 0;
+  background: linear-gradient(to top, #ff6a00c0, #ee097882);
+  padding: 20px ;
   width: 90%;
   border-radius: 10px;
 }
@@ -425,12 +419,11 @@ header {
   font-size: 45px;
   font-weight: 600;
   text-align: center;
-  margin-top: 15vh;
   padding: 40px;
   border-bottom: 2px solid;
   border-radius: 20px;
   width: 100%;
-  color: #23527c;
+  color: #0a0a0afc;
 }
 
 .categories {
@@ -459,7 +452,7 @@ header {
 }
 
 .slider-container {
-  overflow: hidden;
+  margin-bottom: 20px;
   position: relative;
 }
 .button-container {
@@ -470,53 +463,44 @@ header {
 }
 .slider {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  text-align: center;
   transition: transform 0.3s;
-}
-
-.prev-button,
-.next-button {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 40px;
-  height: 40px;
-  background-color: #337ab7;
-  color: white;
-  border: none;
-  border-radius: 50%;
-  font-size: 24px;
-  cursor: pointer;
-}
-
-.prev-button {
-  left: 10px;
-}
-
-.next-button {
-  right: 10px;
-  background-color: #095cec;
 }
 
 #verMenosButton {
   display: inline-block;
   padding: 10px 20px;
-  background-color: #aca28d;
-  color: #333333;
+  width: 100px;
+  background: linear-gradient(to right, #000000, #ff69b4);
+  color: #ffffff;
   border: none;
+  font-size: 16px;
+  box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.5);
   border-radius: 4px;
   cursor: pointer;
-  transition: background-color 0.3s, color 0.3s;
+  transition: background-color 0.3s, color 0.3s, transform 0.3s;
+ 
   display: none;
 }
 #verMasButton {
   display: inline-block;
-  padding: 10px 20px;
-  background-color: #aca28d;
-  color: #333333;
+  background: linear-gradient(to right, #000000, #ff69b4);
+  color: #ffffff;
   border: none;
+  padding: 10px 20px;
+  width: 100px;
+  font-size: 16px;
+  box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.5);
   border-radius: 4px;
   cursor: pointer;
-  transition: background-color 0.3s, color 0.3s;
+  transition: background-color 0.3s, color 0.3s,transform 0.3s;
+
+}
+#verMasButton:hover, #verMenosButton:hover {
+  transform: scale(1.1);
+
 }
 .wrap-container {
   width: 90%;
@@ -556,9 +540,12 @@ header {
 
 .contact-info {
   text-align: start;
+  color: #f1f4f7;
   margin-right: 50px;
-  border: 1px solid #ffffff;
-  background-image: linear-gradient(to top, #868481, #93918d);
+  border:  1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.5);
+  background: linear-gradient(to bottom, rgba(238, 130, 238, 0.6), transparent);
+  opacity: 0.8;
   border-radius: 10px;
   padding: 20px;
 }

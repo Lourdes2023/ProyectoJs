@@ -302,14 +302,13 @@ const divideArrayIntoGroups = (
 let appState = {
   products: [],
   dividedGroups: [],
-  groupSize: 8,
+  groupSize: 4,
   firstGroupIndex: 0,
-  lastGroupIndex: 3,
+  lastGroupIndex: Math.ceil(productsdata.length / 4) - 1,
   slidePosition: 0,
 };
 
 appState.products = productsdata;
-console.log();
 
 appState.dividedGroups = divideArrayIntoGroups(
   appState.products,
@@ -317,4 +316,3 @@ appState.dividedGroups = divideArrayIntoGroups(
   appState.firstGroupIndex,
   appState.lastGroupIndex
 );
-console.log(appState.dividedGroups);

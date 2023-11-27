@@ -68,61 +68,28 @@ const createProductTemplate = (product) => {
 const renderProductCards = (productsList) => {
   const groupTotal = productsList;
   productsContainer.innerHTML = groupTotal.map(createProductTemplate).join("");
-  console.log(groupTotal);
-};
-//------------------------------------------------------------Botones Ver mas y ver menos-----------------------------------------
-const showAllProducts = () => {
-  const groupToShow = appState.dividedGroups[currentPosition];
-  renderProductCards(groupToShow);
-  slider.classList.add("wrap-container");
-  prevButton.style.display = "none";
-  nextButton.style.display = "none";
+  console.log(  "este es renderProdutCards :", groupTotal);
+  localStorage.setItem("products", JSON.stringify(appState.products))
 
-  currentPosition = (currentPosition + 1) % appState.dividedGroups.length;
-
-  if (currentPosition === 0 && appState.dividedGroups.length > 1) {
-    verMasButton.style.display = "none";
-    verMenosButton.style.display = "block";
-  } else {
-    verMasButton.style.display = "block";
-
-    verMenosButton.style.display = "block";
-  }
 };
 
-const showLessProducts = () => {
-  slider.classList.remove("wrap-container");
-  prevButton.style.display = "block";
-  nextButton.style.display = "block";
-  verMasButton.style.display = "block";
-
-  verMenosButton.style.display = "none";
-};
 //------------------------------------------------------------Mostrar productos buscados-----------------------------------------
 
-const getProductByName = (name) => {
-  const product = appState.products.find(
-    (product) => product.name.toLowerCase() === name.toLowerCase()
-  );
-  console.log("ultimoBuscado", appState.products);
-  console.log("ultimoBuscado", product);
-  return product;
-};
+function searchProduct(productName) {
+  let storedProducts = JSON.parse(localStorage.getItem('products'));
+  let product = storedProducts.find(p => p.name.toLowerCase() === productName.toLowerCase());
+  return product ? product : null;
+}
 
-const showSearchedProduct = (product) => {
-  searchResults.innerHTML = createProductTemplate(product);
-};
-
-const searchAndShowProduct = () => {
-  const productName = searchInput.value.trim();
-  const searchedProduct = getProductByName(productName) || defaultProduct;
-  localStorage.setItem("ultimoBuscado", JSON.stringify(searchedProduct));
-  showSearchedProduct(searchedProduct);
-};
-
-const lastSearchedProduct = JSON.parse(localStorage.getItem("ultimoBuscado"));
-showSearchedProduct(lastSearchedProduct || defaultProduct);
-
+function searchAndShowProduct() {
+  let productName = searchInput.value;
+  let product = searchProduct(productName);
+  if (product) {
+    searchResults.innerHTML = createProductTemplate(product);
+  } else {
+    alert('Producto con nombre ' + productName + ' no diseñado aún');
+  }
+}
 //---------------------------------------------------------------Agregar al carrito--------------------------------------------------
 
 const getCartItemsFromLocalStorage = () => {
@@ -302,72 +269,32 @@ const handleCheckout = () => {
   }
 };
 
-//-------------------------------------------------------------------Deslizar productos---------------------------------------
-
-//---------------------------------------------------------Botones de deslizamiento-----------------------------------------------------------------------------
-
-const slideLeft = () => {
-  const cardWidth = 300;
-  const numProductsToSlide = Math.floor(window.innerWidth / cardWidth);
-  appState.slidePosition += cardWidth * numProductsToSlide;
-
-  const maxSlidePosition = 0;
-  const minSlidePosition = -(
-    productsContainer.scrollWidth - productsContainer.clientWidth
-  );
-
-  if (appState.slidePosition > maxSlidePosition) {
-    appState.slidePosition = maxSlidePosition;
-  }
-  if (appState.slidePosition < minSlidePosition) {
-    appState.slidePosition = minSlidePosition;
-  }
-
-  productsContainer.style.transform = `translateX(${appState.slidePosition}px)`;
-};
-
-const slideRight = () => {
-  const cardWidth = 300;
-  const numProductsToSlide = Math.floor(window.innerWidth / cardWidth);
-  appState.slidePosition -= cardWidth * numProductsToSlide;
-
-  const maxSlidePosition = 0;
-  const minSlidePosition = -(
-    productsContainer.scrollWidth - productsContainer.clientWidth
-  );
-
-  if (appState.slidePosition < minSlidePosition) {
-    appState.slidePosition = minSlidePosition;
-  }
-  if (appState.slidePosition > maxSlidePosition) {
-    appState.slidePosition = maxSlidePosition;
-  }
-
-  productsContainer.style.transform = `translateX(${appState.slidePosition}px)`;
-};
 
 //------------------------------------------------------------------filtro por categoria-----------------------------------------------------------------------------
-//Función para filtrar los productos por categoría
 const filterProductsByCategory = (category) => {
+  let filteredProducts;
   if (category === "all") {
-    renderProductCards(appState.products);
-    if (slider.classList.contains("wrap-container")) {
-      verMasButton.style.display = "none";
-      verMenosButton.style.display = "block";
-    }
+    filteredProducts = appState.products;
+    
   } else {
-    const filteredProducts = appState.products.filter(
+    filteredProducts = appState.products.filter(
       (product) => product.category === category
     );
-    renderProductCards(filteredProducts);
-    if (slider.classList.contains("wrap-container")) {
-      verMasButton.style.display = "none";
-      verMenosButton.style.display = "block";
-    }
   }
+  appState.dividedGroups = divideArrayIntoGroups(
+    filteredProducts,
+    4,
+    0,
+    Math.ceil(filteredProducts.length / 4) - 1
+  );
   appState.slidePosition = 0;
   productsContainer.style.transform = `translateX(${appState.slidePosition}px)`;
-};
+  verMasButton.style.display = appState.dividedGroups.length > 1 ? "block" : "none";
+  verMenosButton.style.display = "none";
+   renderProductCards(appState.dividedGroups[0]);
+}; 
+ 
+
 categoryButtons.forEach((button) => {
   button.addEventListener("click", () => {
     const category = button.dataset.category;
@@ -379,9 +306,69 @@ categoryButtons.forEach((button) => {
   });
 });
 
+/*-------------------------------------ver mas y ver menos-----------------------------------------*/
+// Evento para el botón "ver más"
+function showAllProducts() {
+  if (appState.slidePosition < appState.dividedGroups.length - 1) {
+    appState.slidePosition++;
+    renderProductCards(appState.dividedGroups[appState.slidePosition]);
+    verMenosButton.style.display = "block";
+  }
+
+  if (appState.slidePosition === appState.dividedGroups.length - 1) {
+    verMasButton.style.display = "none";
+  }
+}
+
+// Evento para el botón "ver menos"
+function showLessProducts() {
+  if (appState.slidePosition > 0) {
+    appState.slidePosition--;
+    renderProductCards(appState.dividedGroups[appState.slidePosition]);
+    verMasButton.style.display = "block";
+  }
+
+  if (appState.slidePosition === 0) {
+    verMenosButton.style.display = "none";
+  }
+}
+
+function init() {
+  renderProductCards(appState.products);
+  verMasButton.addEventListener("click", showAllProducts);
+  verMenosButton.addEventListener("click", showLessProducts);
+  searchButton.addEventListener("click", searchAndShowProduct);
+  checkoutButton.addEventListener("click", handleCheckout);
+  cartIcon.addEventListener("click", toggleCartVisibility);
+  navbarToggleIcon.addEventListener("click", toggleMenu);
+  window.addEventListener("scroll", closeCartAndMenu);
+  document.addEventListener("DOMContentLoaded", () => {
+    updateCartUI();
+    updateCartCount();
+  });
+  document.addEventListener("click", (event) => {
+    if (event.target.classList.contains("remove-item")) {
+      removeFromCart(event);
+    } else if (event.target.classList.contains("add-to-cart-button")) {
+      addToCart(event);
+    }
+  });
+  searchInput.addEventListener("keyup", (event) => {
+    if (event.key === "Enter") {
+      searchAndShowProduct();
+    }
+  });
+  appState.products.unshift(defaultProduct);
+  myForm.addEventListener("submit", handleMessageSubmission);
+  nameInput.addEventListener("input", () => checkTextInput(nameInput));
+  emailInput.addEventListener("input", () => checkEmailInput(emailInput));
+  messageInput.addEventListener("input", () => checkMessageInput(messageInput));
+}
+
+init();
 //------------------------------------------------------------------formularioMessage-------------------------------------
 
-const handleMessageSubmission = (e) => {
+function handleMessageSubmission(e) {
   e.preventDefault();
   const isValidName = checkTextInput(nameInput);
   const isValidEmail = checkEmailInput(emailInput);
@@ -402,7 +389,7 @@ const handleMessageSubmission = (e) => {
   } else {
     return;
   }
-};
+}
 
 const checkTextInput = (input) => {
   const value = input.value.trim();
@@ -485,9 +472,7 @@ const showMessage = (input, message, isValid = true) => {
 //.................................................................Inicializacion.......................................................................................
 
 function init() {
-  renderProductCards(appState.products);
-  prevButton.addEventListener("click", slideLeft);
-  nextButton.addEventListener("click", slideRight);
+  renderProductCards(appState.dividedGroups[0 ]);
   verMasButton.addEventListener("click", showAllProducts);
   verMenosButton.addEventListener("click", showLessProducts);
   searchButton.addEventListener("click", searchAndShowProduct);
