@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap');
+
+:root {
+  --color-terracota: #D99873;
+  --color-vino: #6A2C2C;
+  --color-crema: #F8F4F0;
+  --color-oro: #C89F9C;
+  --color-negro: #2D2D2D;
+}
+
+body {
+  font-family: 'Lato', sans-serif;
+  background-color: var(--color-crema);
+  color: var(--color-negro);
+}
+
+.btn-primary {
+  background-color: var(--color-vino);
+  border-color: var(--color-vino);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-terracota);
+  border-color: var(--color-vino);
+}
+
+.btn-outline-primary {
+  color: var(--color-vino);
+  border-color: var(--color-vino);
+}
+
+.btn-outline-primary:hover {
+  background-color: var(--color-vino);
+  color: var(--color-crema);
+  border-color: var(--color-vino);
+}
+
+/* Header */
+header {
+  background-color: rgba(248, 244, 240, 0.9);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  border-bottom: 2px solid var(--color-oro);
+}
+
+.logo-img {
+  width: 60px;
+  height: 60px;
+}
+
+/* Cart */
+.cart {
+  position: relative;
+}
+
+.shopping-cart {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 100%;
+  width: 18rem;
+  background-color: #fff;
+  border: 1px solid #dee2e6;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  z-index: 1000;
+}
+
+.cart.openCart .shopping-cart {
+  display: block;
+}
+
+.cart-icon img {
+  width: 1.8rem;
+}
+
+.cart-count {
+  position: absolute;
+  top: 0;
+  right: -0.5rem;
+  background: #dc3545;
+  color: #fff;
+  border-radius: 50%;
+  padding: 0 0.35rem;
+  font-size: 0.8rem;
+}
+
+/* Sections */
+.hero {
+  background: linear-gradient(135deg, var(--color-crema), var(--color-terracota));
+  padding: 4rem 0;
+}
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  color: var(--color-vino);
+}
+
+.contact-section {
+  background-color: var(--color-crema);
+  padding: 4rem 0;
+  border-top: 1px solid var(--color-oro);
+}
+
+footer {
+  background: var(--color-vino);
+  color: var(--color-crema);
+}
+
+.modal.show {
+  display: block;
+}

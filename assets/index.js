@@ -57,7 +57,7 @@ const createProductTemplate = (product) => {
             data-image="${image}"
             data-id="${id}"
             >
-              Agregar al carrito
+              Añadir al carrito
             </button>
           </div>
         </div>
