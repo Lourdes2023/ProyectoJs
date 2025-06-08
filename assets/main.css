@@ -1,32 +1,45 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap');
 
 :root {
-  --primary-color: #6c63ff;
-  --primary-hover: #574fd6;
-  --accent-light: #f0f4ff;
+  --color-terracota: #D99873;
+  --color-vino: #6A2C2C;
+  --color-crema: #F8F4F0;
+  --color-oro: #C89F9C;
+  --color-negro: #2D2D2D;
 }
 
 body {
-  font-family: 'Poppins', sans-serif;
-  background-color: #f8f9fa;
-  color: #333;
+  font-family: 'Lato', sans-serif;
+  background-color: var(--color-crema);
+  color: var(--color-negro);
 }
 
 .btn-primary {
-  background-color: var(--primary-color);
-  border-color: var(--primary-color);
+  background-color: var(--color-vino);
+  border-color: var(--color-vino);
 }
 
 .btn-primary:hover {
-  background-color: var(--primary-hover);
-  border-color: var(--primary-hover);
+  background-color: var(--color-terracota);
+  border-color: var(--color-vino);
+}
+
+.btn-outline-primary {
+  color: var(--color-vino);
+  border-color: var(--color-vino);
+}
+
+.btn-outline-primary:hover {
+  background-color: var(--color-vino);
+  color: var(--color-crema);
+  border-color: var(--color-vino);
 }
 
 /* Header */
 header {
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(248, 244, 240, 0.9);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-  border-bottom: 3px solid var(--accent-light);
+  border-bottom: 2px solid var(--color-oro);
 }
 
 .logo-img {
@@ -73,25 +86,26 @@ header {
 
 /* Sections */
 .hero {
-  background: linear-gradient(135deg, var(--accent-light), #ffffff);
+  background: linear-gradient(135deg, var(--color-crema), var(--color-terracota));
   padding: 4rem 0;
 }
 
 .section-title {
-  font-weight: 600;
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
   margin-bottom: 2rem;
-  color: var(--primary-color);
+  color: var(--color-vino);
 }
 
 .contact-section {
-  background-color: #ffffff;
+  background-color: var(--color-crema);
   padding: 4rem 0;
-  border-top: 1px solid #e9ecef;
+  border-top: 1px solid var(--color-oro);
 }
 
 footer {
-  background: var(--primary-color);
-  color: #fff;
+  background: var(--color-vino);
+  color: var(--color-crema);
 }
 
 .modal.show {
