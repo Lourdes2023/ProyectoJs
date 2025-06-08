@@ -1,15 +1,32 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
+:root {
+  --primary-color: #6c63ff;
+  --primary-hover: #574fd6;
+  --accent-light: #f0f4ff;
+}
+
 body {
   font-family: 'Poppins', sans-serif;
   background-color: #f8f9fa;
   color: #333;
 }
 
+.btn-primary {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-hover);
+  border-color: var(--primary-hover);
+}
+
 /* Header */
 header {
   background-color: rgba(255, 255, 255, 0.9);
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  border-bottom: 3px solid var(--accent-light);
 }
 
 .logo-img {
@@ -56,13 +73,14 @@ header {
 
 /* Sections */
 .hero {
-  background-color: #fff;
+  background: linear-gradient(135deg, var(--accent-light), #ffffff);
   padding: 4rem 0;
 }
 
 .section-title {
   font-weight: 600;
   margin-bottom: 2rem;
+  color: var(--primary-color);
 }
 
 .contact-section {
@@ -72,7 +90,7 @@ header {
 }
 
 footer {
-  background: #212529;
+  background: var(--primary-color);
   color: #fff;
 }
 
